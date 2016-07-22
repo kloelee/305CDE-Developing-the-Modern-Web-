@@ -1,0 +1,45 @@
+@charset "utf-8";
+
+
+html, body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, p,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-size: 16px;
+	vertical-align: baseline;
+	background: transparent;
+	font-family: "Exotc350 Bd BT";
+}
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section { 
+	display: block;
+}
+ul, ol {
+	list-style: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+	empty-cells: show;
+}
+caption, th {
+	text-align: left;
+}
+img {
+	border: 0;
+	vertical-align: top;
+}
+address, em, strong, cite, dfn, code, var, caption, th {
+	font-style: normal;
+	font-weight: normal;
+}
+
+
+.clearfix:after {
+	content: "."; display: block; clear: both; height: 0; visibility: hidden;
+}

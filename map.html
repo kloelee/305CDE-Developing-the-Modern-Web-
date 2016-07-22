@@ -1,0 +1,75 @@
+<html>
+  <head>
+    <title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+
+var map;
+function initMap() {
+    var locations = [
+      ['Canada', 56.1303660,-106.3467710],
+      ['United States', 37.0902400,-95.7128910],
+      ['Brazil', -14.2350040,-51.9252800],
+      ['Uruguay',-32.5227790,-55.7658350],
+      ['Argentina', -38.4160970,-63.6166720],
+      ['Iceland', 64.9630510,-19.0208350],
+      ['South Africa', -30.5594820,22.9375060],
+      ['Portugal', 39.3998720,-8.2244540],
+      ['Spain', 40.4636670,-3.7492200],
+      ['Ireland', 53.4129100,-8.2438900],
+      ['United Kingdom', 55.3780510,-3.4359730],
+      ['France', 46.2276380,2.2137490],
+      ['Luxembourg',49.8152730,6.1295830],
+      ['Belgium', 50.5038870,4.4699360],
+      ['Netherlands', 52.1326330,5.2912660],
+      ['Denmark', 56.2639200,9.5017850],
+      ['Norway', 60.4720240,8.4689460],
+      ['Sweden', 60.1281610,18.6435010],
+      ['Finland', 61.9241100,25.7481510],
+      ['New Zealand', -40.9005570,174.8859710]
+    ];
+	var myOptions = {
+        zoom: 1,
+            center: new google.maps.LatLng(52.1951014,3.0367366),
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        var map = new google.maps.Map(document.getElementById("map"), myOptions);
+
+    var infowindow = new google.maps.InfoWindow();
+
+    var marker, i;
+	   for (i = 0; i < locations.length; i++) {  
+		  marker = new google.maps.Marker({
+			position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+			map: map,
+			icon: '/img/map_icon.png'
+		  });
+
+		  google.maps.event.addListener(marker, 'click', (function(marker, i) {
+			return function() {
+			  infowindow.setContent(locations[i][0]);
+			  infowindow.open(map, marker);
+			}
+		  })(marker, i));
+		}
+}
+
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC7NAQI6wLbhPuSM0VlIwTt5WkyQy6eVw4&callback=initMap"
+        async defer></script>
+  </body>
+</html>

@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery.mobile-1.4.5.min.js"></script>
+<script type="text/javascript" src="/js/index.js"></script>
+
+<script>
+       $(document).ready(function() {
+	   
+		$('#login').swiperight(function(){
+			$('.button').click();
+		});
+
+		$('#register').swipeleft(function(){
+			$('.button4').click();
+		});
+
+	   $('#register').on('submit', function() {
+			if (this.checkValidity() == false) {
+				return false;
+			}
+			var URLs="register.php";
+          
+			var userid=$("#username_textbox").val();
+			var pwdid=$("#password_textbox").val();
+			var emailid=$("#email_textbox").val();
+			var myData = "&usid="+ userid + "&pwid=" + pwdid + "&elid=" + emailid; 
+         	  
+			$.ajax({
+				url: URLs, 
+				data: myData, 
+				type:"POST", 
+				dataType:'text',
+				success: function(msg){ 
+					alert(msg);
+					if (msg=='Successful')
+					{
+						alert("Account created.");
+						location = 'index.html';
+					}else{
+						alert("Username unavailable, please try another one.");
+					}
+				},
+				error:function(xhr, ajaxOptions, thrownError){
+				   alert(xhr.status);
+				   alert(thrownError);
+				   location.reload();
+			   }
+			 });
+			 return false;
+		});
+
+	   $('#login').on('submit', function() {
+			if (this.checkValidity() == false) {
+				return false;
+			}
+			
+			var URLs="login.php";
+	  
+			var userid=$("#username").val();
+			var pwdid=$("#password").val();
+			var rememberme=$("#remembermebtn").val();
+			var myData = "&username="+ userid + "&password=" + pwdid + "&rememberme=" + rememberme; 
+
+			$.ajax({
+				url: URLs,
+				data: myData,
+				type:"POST",
+				dataType:'text',
+				success: function(msg){
+					alert(msg);
+					if(msg == "Successful"){ 
+						location = 'frontpage.html';
+					}else{
+					
+					}
+					
+				},
+				error:function(xhr, ajaxOptions, thrownError){
+				   alert(xhr.status);
+				   alert(thrownError);
+				   
+			   }
+			 });
+			 return false;
+		});
+			
+var password = document.getElementById("password_textbox")
+  , confirm_password = document.getElementById("confirm_password");
+
+function validatePassword(){
+  if(password.value != confirm_password.value) {
+    confirm_password.setCustomValidity("Passwords Don't Match");
+  } else {
+    confirm_password.setCustomValidity('');
+  }
+}
+
+password.onchange = validatePassword;
+confirm_password.onkeyup = validatePassword;
+			
+});
+		
+</script>
+<link rel="stylesheet" href="jquery.mobile-1.4.5.min.css">
+
+<style>
+@-webkit-keyframes hide_login {
+ 0%{
+	 -webkit-transform: rotateY(0deg);
+ }
+ 100%{
+	 -webkit-transform: rotateY(180deg);
+ }
+}
+
+@-webkit-keyframes show_register {
+ 0%{
+	 -webkit-transform:rotateY(180deg);
+ }
+ 100%{
+	 -webkit-transform:rotateY(0deg);
+ }
+}
+
+@-webkit-keyframes show_login {
+ 0%{
+	 -webkit-transform: rotateY(180deg);
+ }
+ 100%{
+	 -webkit-transform: rotateY(0deg);
+ }
+}
+
+@-webkit-keyframes hide_register {
+ 0%{
+	 -webkit-transform:rotateY(0deg);
+ }
+ 100%{
+	 -webkit-transform:rotateY(180deg);
+ }
+}
+
+form {
+	margin: 100 auto;
+	font-family: Tahoma;
+	font-size: 14px;
+	background-image: url("img/bg.png");
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	text-align: center;
+	display: inline-block;
+    width: 100%;
+	position:absolute
+}
+
+input[type=text],input[type=password],input[type=email] {
+    width: 80%;
+    padding: 12px 20px;
+	box-shadow:0 0 5px #000;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing:border-box;
+	border-radius:10px;
+}
+
+.button {
+	background:#0CC;
+	color:#fff;
+	border-radius:5px;
+	border:0px;
+	padding:10px;
+	font-size:12px;
+	font-family:tahoma;
+}
+
+.button:hover {
+	color:#099;
+	background: transparent;
+	cursor:pointer;
+	font-weight: bold;
+}
+
+.button2 {
+	margin-top:15px;
+	background:#099;
+	color:#fff;
+	width: 150px;
+	border-radius:5px;
+	border:0px;
+	padding:10px;
+	font-size:15px;
+	font-family:tahoma;
+	    text-decoration: none;
+}
+
+.button2:hover {
+	color:#099;
+	background:transparent ;
+	cursor:pointer;
+	font-weight: bold;
+}
+
+.button3 {
+	background:#099;
+	width:150px;
+	color:#fff;
+	border-radius:10px;
+	border:0px;
+	padding:10px;
+	font-size:16px;
+	font-family:tahoma;
+}
+
+.button3:hover {
+	color:#099;
+	background:transparent ;
+	cursor:pointer;
+	font-weight: bold;
+}
+
+.button4 {
+	color:#fff;
+	border-radius:5px;
+	border:0px;
+	padding:4px;
+}
+
+
+.container {
+	padding: 16px;
+	background-image: url("img/bg2.png");
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+	width: auto;
+	height: 500px;
+	font-weight: bold;
+	color: #066;
+}
+
+.container2 {
+	margin-top:15px;
+    padding: 10px;
+    width:auto;
+}
+
+.container2 p {
+	font-size: 10px;
+	font-family:Tahoma;
+	margin: center;
+}
+
+.container0 {
+    padding: 16px;
+    width:auto;
+	height:10px;
+}
+.container0 p {
+	font-size: 18px;
+	font-family: Tahoma;
+	margin: -2px 0 12px 0;
+	font-weight: bold;
+	color: #FFF;
+}
+
+.rememberme {
+	font-size: 12px;
+}
+
+#login {
+	-webkit-animation-duration: 2s;
+	-webkit-backface-visibility:hidden;
+}
+
+#register {
+	-webkit-transform: rotateY(180deg);
+	-webkit-backface-visibility: hidden;
+	-webkit-animation-duration: 2s;
+}
+.ui-loader { display: none; }
+body{
+	margin:0px;
+}
+
+</style>
+
+
+</head>
+
+
+<body>
+
+<form id="login">
+
+<div class="container0" align="center" style="background-color:#6CC">
+<p>LOGIN</p> </div>
+
+  <div class="container" align="center">
+  <br><br><br>
+  <br><br>
+  <label><b>Username:</b></label>
+  <br>
+    <input type="text" placeholder="Enter Username" id="username" required><br>
+
+    <label><b>Password:</b></label>
+    
+    <div><input type="password" placeholder="Enter Password" id="password" required></div>
+    <div>
+    <button class="button2">。 LOGIN 。</button>
+    </div>
+    <br>   
+    <input type="checkbox" checked="checked" id="remembermebtn" value="on"> 
+    <span class="rememberme">Remember me</span>
+    
+    <br><br><br>
+    <a href='#' class="button">Dont't have account? Register Now</a>
+    
+    <br><br><br>
+        
+      <a href="/forgotpassword.html" class="forgotpassword"><img src="img/forgotpw.png" width="107" height="36"></a>
+      
+  </div>
+  <div class="container2" align="center" style="background-color:#6CC">
+  <p>®Designed by Kloe</p>  
+  </div>
+
+  
+</form>
+
+<form id="register">
+
+<div class="container0" align="center" style="background-color:#6CC">
+<p>Register Here</p> 
+</div>
+
+  <div class="container" align="center">
+    <p><br>
+      <br>
+      <label><b>Username:</b></label>
+      <br>
+      <input type="text" placeholder="Enter Username" id="username_textbox" required>
+      <br>
+      <label><b>Password:</b></label>
+      <br>
+      <input type="password" placeholder="Enter Password" id="password_textbox" required>
+      <br>
+      <label><b>Confirm Password:</b></label>
+      <br>
+      <input type="password" placeholder="Confirm Password" id="confirm_password" required>
+      <br>
+      <label><b>Email address:</b></label>
+      <br>
+      <input type="email" placeholder="Enter Email" id="email_textbox" required>
+      <br>
+	  <button class="button3">。 Register` 。</button>
+      <br><br>
+      <a href='#' class="button4"><img src="img/backlogin.png" width="79" height="46"></a>
+      <br>
+      <br>
+
+  </div>
+  <div class="container2" align="center" style="background-color:#6CC">
+  <p>®Designed by Kloe</p>  
+  </div>
+  
+</form>
+
+</body>
+</html>
+
