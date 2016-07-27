@@ -22,7 +22,7 @@
 			if (this.checkValidity() == false) {
 				return false;
 			}
-			var URLs="register.php";
+			var URLs="register";
           
 			var userid=$("#username_textbox").val();
 			var pwdid=$("#password_textbox").val();
@@ -31,7 +31,7 @@
          	  
 			$.ajax({
 				url: URLs, 
-				data: myData, 
+				data: {usid:userid, pwid:pwdid, emailid:emailid}, 
 				type:"POST", 
 				dataType:'text',
 				success: function(msg){ 
@@ -58,16 +58,15 @@
 				return false;
 			}
 			
-			var URLs="login.php";
+			var URLs="login";
 	  
 			var userid=$("#username").val();
 			var pwdid=$("#password").val();
 			var rememberme=$("#remembermebtn").val();
-			var myData = "&username="+ userid + "&password=" + pwdid + "&rememberme=" + rememberme; 
-
+			
 			$.ajax({
 				url: URLs,
-				data: myData,
+				data: { username:userid, password:pwdid, rememberme:rememberme },
 				type:"POST",
 				dataType:'text',
 				success: function(msg){

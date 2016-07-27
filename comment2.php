@@ -17,10 +17,11 @@ session_start();
 function reloadlist(){
 	$("#JSON_table").empty();
 	$.ajax({ 
-		url: "get_comment.php", 
+		url: "comment", 
 		type: "GET", 
 		dataType: "json", 
 		success: function(guest) { 
+		console.log(guest);
 			$.each(guest, function(k,v) {
 				if(v.updatable == 1){
 					$("#JSON_table").append("<tr>" + "<td width='30%';>Username: " + v.guestName + "<br> Email: " + v.guestEmail + "<br>Comment Time : " + v.guestTime + "</td>" + "<td><table width='100%' height='100%'><tr><td>Subject: <input type='text' guest=\""+v.id+"\"  id=\"Subject\" style=\"width: 80%;\" value=\"" + v.guestSubject + "\" /></td></tr>" + "<tr><td  colspan='3' valign='top' style='height:100px'><hr><textarea id=\"commentText\" guest=\""+v.id+"\"  style=\"    display: inline-block;    width: 97%; height:100%;   margin: 10px auto;    height: 30px;    vertical-align: middle;\">" + v.guestContent + "</textarea></td></tr></table></td>" + "</tr>"); if(v.updatable == 1) $("#JSON_table").append("<tr style='text-align:center'><td colspan='2'><button id='delete'guest=\""+v.id+"\"  class='button2'>。Remove Message。</button><button id=\"edit\" guest=\""+v.id+"\" class=\"button2\">  。Edit Message。</button></td></tr>");
@@ -30,7 +31,7 @@ function reloadlist(){
 				}});
 			$("#delete").click(function() {						  
 					$.ajax({
-					  url:'get_comment.php',
+					  url:'comment',
 					  type:"DELETE",
 					  dataType : 'text',
 					  data:{ id : $(this).attr('guest') },
@@ -47,7 +48,7 @@ function reloadlist(){
 			});			
 			$("#edit").click(function() {
 					$.ajax({
-					  url:'get_comment.php',
+					  url:'comment',
 					  type:"PUT",
 					  dataType : 'text',
 					  data:{ id : $(this).attr('guest'), subject: $("#Subject[guest='"+$(this).attr('guest')+"']").val(),  comment: $("#commentText[guest='"+$(this).attr('guest')+"']").val() },
@@ -75,36 +76,12 @@ $(function(){
 	reloadlist();
 $("#LeaveComment").click(function(){
 	if($("#Subject").val().trim() == '' || $("#commentText").val().trim() == '') { alert('Please enter Subject and Comment Msg'); return; }
-	$.post("leaveComment.php",{ subject : $("#Subject").val(),  comment: $("#commentText").val() },function(){
+	$.post("comment",{ subject : $("#Subject").val(),  comment: $("#commentText").val() },function(){
 		reloadlist();
 		$("#Subject,#commentText").val('');
 	});
 	return false;
 });
-$("#update").click(function() {
-	var newpass=$("#updatecontent").val();
-	
-    var myData = 'guestName='+guestName+'&updatecontent='+updatecontent;
-	 			
-        $.ajax({
-  		  	 url:'comment2.php',
-  			   type:"PUT",
-           dataType : 'text',
-  			   data:myData,
-        success: function(msg, status){
-    				alert(msg);
-        
-                },
-                 error:function(xhr, ajaxOptions, thrownError){
-                    alert(xhr.status);
-                    alert(thrownError);
-                 }
-            });
-   
-});
-
-
-
 });
 </script>
 
